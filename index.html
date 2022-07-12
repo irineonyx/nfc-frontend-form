@@ -3,13 +3,880 @@
   <head>
     <title>NFC Sign In</title>
     <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/css/selectize.min.css" integrity="sha512-zSutnLmqtlWVx0A5NdW8YwshpUETPzJ6YBAvb+bkE0QbVKopS0ACPjE6QY6F9aFPSowfiho+hgeQh095FRPj5A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.6/js/standalone/selectize.js" integrity="sha512-X6kWCt4NijyqM0ebb3vgEPE8jtUu9OGGXYGJ86bXTm3oH+oJ5+2UBvUw+uz+eEf3DcTTfJT4YQu/7F6MRV+wbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
+    <style>
+      .form-group{
+        /*display: none;*/
+      }
+      .tabs ul{
+        margin:  0;
+      }
+      .content-tab{
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      #sign-in-content{
+        padding: 20px;
+      }
+    </style>
+
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
+    <button id="authorize_button" onclick="handleAuthClick()">Sign In To Authorize</button>
     <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
 
-    <pre id="content" style="white-space: pre-wrap;"></pre>
+    <div id="form-container" class="container" style="display: none;">
+        <div class="content form-group">
+            <section class="hero is-light">
+                <div class="hero-head">
+                    <div id="sign-in-content"></div>
+                </div>
+
+                <div class="hero-foot">
+                    <div class="tabs is-boxed is-fullwidth is-large">
+                        <ul>
+                            <li id="tab-mfs" class="is-active tab-menu"><a>MFS</a></li>
+                            <li id="tab-lsh" class="tab-menu"><a>LSH</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <div id="content-tab-mfs" class="content-tab">
+                <form id="form-mfs">
+                    <input type="hidden" name="mfs-email">
+                    <h4 class="title is-4">Main Applicant (Parent)</h3>
+                    <!-- section main applicant -->
+                    <div class="box">
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Salutation</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Salutation" name="mfs-salutation">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Full Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Full Name" name="mfs-name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Email</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Email" name="mfs-email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Mobile No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Mobile" name="mfs-mobile">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">NRIC / FIN / Passport No.</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="NRIC / FIN / Passport No." name="mfs-identification-code">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Relationship to Child</label>
+                            <div class="select">
+                                <select name="mfs-parent-relationship">
+                                    <option>Mother</option>
+                                    <option>Father</option>
+                                    <option>MSF Foster Parent</option>
+                                    <option>Head, Children Home</option>
+                                    <option>Legal Guardian</option>
+                                    <option>Any Other Caregiver</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Postal Code</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="" name="mfs-postal-code">
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Street Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="mfs-address-street">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Building Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="mfs-address-building">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Block No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="mfs-address-block">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Floor No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="mfs-address-floor">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Unit No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="mfs-address-unit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end section main applicant -->
+                    
+                    <h4 class="title is-4">Child</h3>
+                    <!-- section child -->
+                    <div class="box">
+                        <div class="field">
+                            <label class="label">Is the child born or unborn</label>
+                            <div class="select" >
+                                <select name="mfs-child-status">
+                                    <option>Born</option>
+                                    <option>Unborn</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Expected delivery date</label>
+                            <div class="control">
+                                <input class="input" type="date" placeholder="" name="mfs-delivery-date">
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Full Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="mfs-child-name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Date of Birth</label>
+                                    <div class="control">
+                                        <input class="input" type="date" placeholder="" name="mfs-child-dob">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Gender</label>
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input type="radio" name="mfs-child-gender" value="male"> Male
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="mfs-child-gender" value="female"> Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Nationality</label>
+                                    <div class="select">
+                                        <select name="mfs-child-nationality">
+                                            <option>Singapore Citizen</option>
+                                            <option>Permanent Resident</option>
+                                            <option>Foreigner</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Child's Birth Cert / FIN / Student Pass</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="" name="mfs-child-identity-no">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Preferred Start Date</label>
+                            <div class="control">
+                                <input class="input" type="date" placeholder="" name="mfs-start-date">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Service Level</label>
+                            <div class="select">
+                                <select name="mfs-service-level">
+                                    <option>Infant</option>
+                                    <option>Toddler</option>
+                                    <option>Playgroup</option>
+                                    <option>Nursery</option>
+                                    <option>K1</option>
+                                    <option>K2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end section child -->
+
+                    <h4 class="title is-4">Enquiry Details</h3>
+                    <!-- section enquiry details -->
+                    <div class="box">
+                        <div class="field">
+                            <label class="label">Lead Source</label>
+                            <div class="select">
+                                <select name="mfs-lead-source">
+                                    <option>Website - MFS</option>
+                                    <option>Website - LSH</option>
+                                    <option>ECDA</option>
+                                    <option>Internal Form - Hotline</option>
+                                    <option>Internal Form - Walk-in</option>
+                                    <option>Internal Form - Email</option>
+                                    <option>Openhouse</option>
+                                    <option>Webinar</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Programme Type</label>
+                            <div class="select">
+                                <select name="mfs-programme-type">
+                                    <option>Full Day</option>
+                                    <option>Half Day (AM)</option>
+                                    <option>Half Day (PM)</option>
+                                    <option>MFS - Flexi Care 1 (AM)</option>
+                                    <option>MFS - Flexi Care 1 (PM)</option>
+                                    <option>MFS - Flexi Care 1 (20Hrs)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Preferred Centre (up to 3 - ranked in order)</label>
+                            <div class="select">
+                                <select multiple class="select-centre" name="mfs-centre" style="width:200px;">
+                                    <option>Blk 491 Admiralty Link</option>
+                                    <option>Blk 113 Alkaff Crescent</option>
+                                    <option>Blk 302B Anchorvale Link</option>
+                                    <option>Blk 314A Anchorvale Link</option>
+                                    <option>Blk 332B Anchorvale Link</option>
+                                    <option>Blk 308C Anchorvale Road</option>
+                                    <option>Blk 331 Ang Mo Kio</option>
+                                    <option>Blk 209 Ang Mo Kio</option>
+                                    <option>Blk 229 Ang Mo Kio</option>
+                                    <option>Blk 329 Ang Mo Kio</option>
+                                    <option>Blk 343 Ang Mo Kio</option>
+                                    <option>Blk 571 Ang Mo Kio</option>
+                                    <option>Blk 601 Ang Mo Kio</option>
+                                    <option>Blk 541 Ang Mo Kio</option>
+                                    <option>Blk 222C Bedok North Drive</option>
+                                    <option>Blk 419 Bedok North</option>
+                                    <option>Blk 503 Bedok North</option>
+                                    <option>Blk 187 Bedok North</option>
+                                    <option>Blk 1 Bedok South</option>
+                                    <option>Blk 153 Bishan</option>
+                                    <option>Blk 236 Bishan</option>
+                                    <option>Blk 245 Bishan</option>
+                                    <option>Blk 197D Boon Lay</option>
+                                    <option>Blk 180B Boon Lay</option>
+                                    <option>Boon Lay Community Centre Level 4</option>
+                                    <option>Blk 997 Buangkok Crescent</option>
+                                    <option>Blk 260 Bukit Batok</option>
+                                    <option>Blk 291A Bukit Batok</option>
+                                    <option>Blk 438 Bukit Batok West</option>
+                                    <option>Blk 235 Bukit Panjang</option>
+                                    <option>Blk 120 Canberra Crescent</option>
+                                    <option>Blk 303 Canberra Road</option>
+                                    <option>Blk 109 Canberra Walk</option>
+                                    <option>Blk 52 Cassia Crescent</option>
+                                    <option>Blk 54 Chin Swee Road</option>
+                                    <option>Blk 815A Choa Chu Kang</option>
+                                    <option>Blk 490D Choa Chu Kang</option>
+                                    <option>Blk 208 Choa Chu Kang Central</option>
+                                    <option>Blk 212 Choa Chu Kang Central</option>
+                                    <option>Blk 684A Choa Chu Kang Crescent</option>
+                                    <option>Blk 602 Choa Chu Kang</option>
+                                    <option>Blk 82 Circuit Road</option>
+                                    <option>Blk 428 Clementi</option>
+                                    <option>Blk 375 Clementi</option>
+                                    <option>Blk 295A Compassvale Crescent</option>
+                                    <option>Blk 269 Compassvale Link</option>
+                                    <option>Blk 203D Compassvale Road</option>
+                                    <option>Blk 230 Compassvale Walk</option>
+                                    <option>Blk 126A Edgedale Plains</option>
+                                    <option>Blk 682B Edgedale Plains</option>
+                                    <option>Blk 119 Edgefield Plains</option>
+                                    <option>Blk 183 Edgefield Plains</option>
+                                    <option>Blk 443A Fajar Road, Fajar Hills</option>
+                                    <option>51 Fernvale Link (Large Childcare Centre at Sengkang West)</option>
+                                    <option>Blk 128 Geylang East</option>
+                                    <option>Guillemard Crescent</option>
+                                    <option>Blk 1 Haig Road</option>
+                                    <option>Blk 51 Havelock Rd</option>
+                                    <option>Blk 106 Henderson Crescent</option>
+                                    <option>Blk 18A Holland Drive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Household Income</label>
+                            <div class="select">
+                                <select name="mfs-income">
+                                    <option selected disabled>Choose income range</option>
+                                    <option>2500 & below</option>
+                                    <option>2501 to 3000</option>
+                                    <option>3001 to 3500</option>
+                                    <option>3501 to 4000</option>
+                                    <option>4001 to 4500</option>
+                                    <option>4501 to 7500</option>
+                                    <option>7501 to 10000</option>
+                                    <option>10000 to 12500</option>
+                                    <option>12501 to 15000</option>
+                                    <option>15000 & above</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Referral Information</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="" name="mfs-referral">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Workplace Association</label>
+                            <div class="select">
+                                <select name="mfs-association">
+                                    <option>LSH: Full List of Workplace Centres</option>
+                                    <option>MFS: NTUC First Campus</option>
+                                    <option>NTUC Other SEs</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Has a Centre Visit been conducted?</label>
+                            <div class="control">
+                                <label class="radio">
+                                    <input type="radio" name="mfs-centre-visit-option" value="yes"> Yes
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="mfs-centre-visit-option" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Centre of Visit</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="mfs-centre-visit">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Date of Centre Visit</label>
+                                    <div class="control">
+                                        <input class="input" type="date" placeholder="" name="mfs-centre-visit-date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Notes</label>
+                            <div class="control">
+                                <textarea class="textarea" placeholder="Your notes here" name="mfs-notes"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Marketing Consent</label>
+                            <div class="select">
+                                <select multiple class="select-consent" name="mfs-consent" style="width:200px;">
+                                    <option>All</option>
+                                    <option>Email</option>
+                                    <option>SMS</option>
+                                    <option>Phone</option>
+                                    <option>App</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end section enquiry details -->
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success" type="submit">Submit MFS Application</button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+
+            <div id="content-tab-lsh" class="content-tab" style="display:none">
+                <form id="form-lsh">
+                    <input type="hidden" name="lsh-email">
+                    <h4 class="title is-4">Main Applicant (Parent)</h3>
+                    <!-- section main applicant -->
+                    <div class="box">
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Salutation</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Salutation" name="lsh-salutation">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Full Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Full Name" name="lsh-name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Email</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Email" name="lsh-email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Mobile No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="Mobile" name="lsh-mobile">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">NRIC / FIN / Passport No.</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="NRIC / FIN / Passport No." name="lsh-identification-code">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Relationship to Child</label>
+                            <div class="select">
+                                <select name="lsh-parent-relationship">
+                                    <option>Mother</option>
+                                    <option>Father</option>
+                                    <option>MSF Foster Parent</option>
+                                    <option>Head, Children Home</option>
+                                    <option>Legal Guardian</option>
+                                    <option>Any Other Caregiver</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Postal Code</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="" name="lsh-postal-code">
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Street Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="lsh-address-street">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Building Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="lsh-address-building">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Block No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="lsh-address-block">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Floor No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="lsh-address-floor">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Unit No.</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="lsh-address-unit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end section main applicant -->
+                    
+                    <h4 class="title is-4">Child</h3>
+                    <!-- section child -->
+                    <div class="box">
+                        <div class="field">
+                            <label class="label">Is the child born or unborn</label>
+                            <div class="select" >
+                                <select name="lsh-child-status">
+                                    <option>Born</option>
+                                    <option>Unborn</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Expected delivery date</label>
+                            <div class="control">
+                                <input class="input" type="date" placeholder="" name="lsh-delivery-date">
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Full Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="lsh-child-name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Date of Birth</label>
+                                    <div class="control">
+                                        <input class="input" type="date" placeholder="" name="lsh-child-dob">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Gender</label>
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input type="radio" name="lsh-child-gender" value="male"> Male
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="lsh-child-gender" value="female"> Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Child's Nationality</label>
+                                    <div class="select">
+                                        <select name="lsh-child-nationality">
+                                            <option>Singapore Citizen</option>
+                                            <option>Permanent Resident</option>
+                                            <option>Foreigner</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Child's Birth Cert / FIN / Student Pass</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="" name="lsh-child-identity-no">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Preferred Start Date</label>
+                            <div class="control">
+                                <input class="input" type="date" placeholder="" name="lsh-start-date">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Service Level</label>
+                            <div class="select">
+                                <select name="lsh-service-level">
+                                    <option>Infant</option>
+                                    <option>Toddler</option>
+                                    <option>Playgroup</option>
+                                    <option>Nursery</option>
+                                    <option>K1</option>
+                                    <option>K2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end section child -->
+
+                    <h4 class="title is-4">Enquiry Details</h3>
+                    <!-- section enquiry details -->
+                    <div class="box">
+                        <div class="field">
+                            <label class="label">Lead Source</label>
+                            <div class="select">
+                                <select name="lsh-lead-source">
+                                    <option>Website - MFS</option>
+                                    <option>Website - LSH</option>
+                                    <option>ECDA</option>
+                                    <option>Internal Form - Hotline</option>
+                                    <option>Internal Form - Walk-in</option>
+                                    <option>Internal Form - Email</option>
+                                    <option>Openhouse</option>
+                                    <option>Webinar</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Programme Type</label>
+                            <div class="select">
+                                <select name="lsh-programme-type">
+                                    <option>Full Day</option>
+                                    <option>Half Day (AM)</option>
+                                    <option>Half Day (PM)</option>
+                                    <option>MFS - Flexi Care 1 (AM)</option>
+                                    <option>MFS - Flexi Care 1 (PM)</option>
+                                    <option>MFS - Flexi Care 1 (20Hrs)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Preferred Centre (up to 3 - ranked in order)</label>
+                            <div class="select">
+                                <select multiple class="select-centre" name="lsh-centre" style="width:200px;">
+                                    <option>Blk 491 Admiralty Link</option>
+                                    <option>Blk 113 Alkaff Crescent</option>
+                                    <option>Blk 302B Anchorvale Link</option>
+                                    <option>Blk 314A Anchorvale Link</option>
+                                    <option>Blk 332B Anchorvale Link</option>
+                                    <option>Blk 308C Anchorvale Road</option>
+                                    <option>Blk 331 Ang Mo Kio</option>
+                                    <option>Blk 209 Ang Mo Kio</option>
+                                    <option>Blk 229 Ang Mo Kio</option>
+                                    <option>Blk 329 Ang Mo Kio</option>
+                                    <option>Blk 343 Ang Mo Kio</option>
+                                    <option>Blk 571 Ang Mo Kio</option>
+                                    <option>Blk 601 Ang Mo Kio</option>
+                                    <option>Blk 541 Ang Mo Kio</option>
+                                    <option>Blk 222C Bedok North Drive</option>
+                                    <option>Blk 419 Bedok North</option>
+                                    <option>Blk 503 Bedok North</option>
+                                    <option>Blk 187 Bedok North</option>
+                                    <option>Blk 1 Bedok South</option>
+                                    <option>Blk 153 Bishan</option>
+                                    <option>Blk 236 Bishan</option>
+                                    <option>Blk 245 Bishan</option>
+                                    <option>Blk 197D Boon Lay</option>
+                                    <option>Blk 180B Boon Lay</option>
+                                    <option>Boon Lay Community Centre Level 4</option>
+                                    <option>Blk 997 Buangkok Crescent</option>
+                                    <option>Blk 260 Bukit Batok</option>
+                                    <option>Blk 291A Bukit Batok</option>
+                                    <option>Blk 438 Bukit Batok West</option>
+                                    <option>Blk 235 Bukit Panjang</option>
+                                    <option>Blk 120 Canberra Crescent</option>
+                                    <option>Blk 303 Canberra Road</option>
+                                    <option>Blk 109 Canberra Walk</option>
+                                    <option>Blk 52 Cassia Crescent</option>
+                                    <option>Blk 54 Chin Swee Road</option>
+                                    <option>Blk 815A Choa Chu Kang</option>
+                                    <option>Blk 490D Choa Chu Kang</option>
+                                    <option>Blk 208 Choa Chu Kang Central</option>
+                                    <option>Blk 212 Choa Chu Kang Central</option>
+                                    <option>Blk 684A Choa Chu Kang Crescent</option>
+                                    <option>Blk 602 Choa Chu Kang</option>
+                                    <option>Blk 82 Circuit Road</option>
+                                    <option>Blk 428 Clementi</option>
+                                    <option>Blk 375 Clementi</option>
+                                    <option>Blk 295A Compassvale Crescent</option>
+                                    <option>Blk 269 Compassvale Link</option>
+                                    <option>Blk 203D Compassvale Road</option>
+                                    <option>Blk 230 Compassvale Walk</option>
+                                    <option>Blk 126A Edgedale Plains</option>
+                                    <option>Blk 682B Edgedale Plains</option>
+                                    <option>Blk 119 Edgefield Plains</option>
+                                    <option>Blk 183 Edgefield Plains</option>
+                                    <option>Blk 443A Fajar Road, Fajar Hills</option>
+                                    <option>51 Fernvale Link (Large Childcare Centre at Sengkang West)</option>
+                                    <option>Blk 128 Geylang East</option>
+                                    <option>Guillemard Crescent</option>
+                                    <option>Blk 1 Haig Road</option>
+                                    <option>Blk 51 Havelock Rd</option>
+                                    <option>Blk 106 Henderson Crescent</option>
+                                    <option>Blk 18A Holland Drive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Household Income</label>
+                            <div class="select">
+                                <select name="lsh-income">
+                                    <option selected disabled>Choose income range</option>
+                                    <option>2500 & below</option>
+                                    <option>2501 to 3000</option>
+                                    <option>3001 to 3500</option>
+                                    <option>3501 to 4000</option>
+                                    <option>4001 to 4500</option>
+                                    <option>4501 to 7500</option>
+                                    <option>7501 to 10000</option>
+                                    <option>10000 to 12500</option>
+                                    <option>12501 to 15000</option>
+                                    <option>15000 & above</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Referral Information</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="" name="lsh-referral">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Workplace Association</label>
+                            <div class="select">
+                                <select name="lsh-association">
+                                    <option>LSH: Full List of Workplace Centres</option>
+                                    <option>MFS: NTUC First Campus</option>
+                                    <option>NTUC Other SEs</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Has a Centre Visit been conducted?</label>
+                            <div class="control">
+                                <label class="radio">
+                                    <input type="radio" name="lsh-centre-visit-option" value="yes"> Yes
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="lsh-centre-visit-option" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Centre of Visit</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="" name="lsh-centre-visit">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="field">
+                                    <label class="label">Date of Centre Visit</label>
+                                    <div class="control">
+                                        <input class="input" type="date" placeholder="" name="lsh-centre-visit-date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Notes</label>
+                            <div class="control">
+                                <textarea class="textarea" placeholder="Your notes here" name="lsh-notes"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Marketing Consent</label>
+                            <div class="select">
+                                <select multiple class="select-consent" name="lsh-consent" style="width:200px;">
+                                    <option>All</option>
+                                    <option>Email</option>
+                                    <option>SMS</option>
+                                    <option>Phone</option>
+                                    <option>App</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end section enquiry details -->
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-success" type="submit">Submit LSH Application</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    
 
     <script type="text/javascript">
       /* exported gapiLoaded */
@@ -124,14 +991,40 @@
           var p = document.createElement('p');
           var name = resp.result.names[0].givenName;
           var email = resp.result.emailAddresses[0].value;
-          console.log(email);
-          p.appendChild(document.createTextNode('Hello, '+name+'!'));
-          document.getElementById('content').appendChild(p);
+
+
+            document.getElementById('form-container').style.display = 'block';
+            p.appendChild(document.createTextNode('Hello, ' + name +' (' + email + ')'));
+            document.getElementById('sign-in-content').appendChild(p);
         });
       }
+
+        $( document ).ready(function() {
+            $(".select-centre").selectize({
+              maxItems: 3,
+            });
+
+            $(".select-consent").selectize();
+
+            $(".tab-menu").click(function() {
+                if($(this).attr('id') == "tab-mfs")
+                    openTab(event,'mfs');
+                else
+                    openTab(event,'lsh');
+            })
+
+            function openTab(evt, tabName) {
+                $(".content-tab").hide();
+                $(".tab-menu").removeClass("is-active");
+                $("#tab-"+tabName).addClass("is-active");
+                $("#content-tab-"+tabName).show();
+            }
+
+        });
 
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    
   </body>
 </html>
