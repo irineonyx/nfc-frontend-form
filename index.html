@@ -395,9 +395,9 @@
                             <label class="label">Workplace Association</label>
                             <div class="select">
                                 <select name="workplace_association">
-                                    <option>LSH: Full List of Workplace Centres</option>
-                                    <option>MFS: NTUC First Campus</option>
-                                    <option>NTUC Other SEs</option>
+                                    <option>LSH</option>
+                                    <option>MFS</option>
+                                    <option>NTUC</option>
                                 </select>
                             </div>
                         </div>
@@ -613,7 +613,8 @@
                 e.preventDefault();
 
                 $.ajax({
-                        url: 'http://54.251.56.36/api/v1/pre-registration/mfs-register',
+                        url: 'http://54.251.56.36/api/v1/mfs-registration/mfs-register',
+                        //url: 'https://3694-103-172-197-182.ngrok.io/api/v1/mfs-registration/mfs-register',
                         type: 'POST',
                         dataType: 'json',
                         crossOrigin: true,
