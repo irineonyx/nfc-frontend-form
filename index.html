@@ -31,7 +31,7 @@
     <button id="authorize_button" onclick="handleAuthClick()">Sign In To Authorize</button>
     <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
 
-    <div id="form-container" class="container" style="display: none;">
+    <div id="form-container" class="container" style="display: block;">
         <div class="content form-group">
             <section class="hero is-light">
                 <div class="hero-head">
@@ -253,12 +253,12 @@
                             <label class="label">Service Level</label>
                             <div class="select">
                                 <select name="service_level">
-                                    <option>Infant</option>
-                                    <option>Toddler</option>
-                                    <option>Playgroup</option>
-                                    <option>Nursery</option>
-                                    <option>K1</option>
-                                    <option>K2</option>
+                                    <option>Infant (2 - 17 mths)</option>
+                                    <option>PlayGroup (18 - 30 mths)</option>
+                                    <option>N1 (3 yo)</option>
+                                    <option>N2 (4 yo)</option>
+                                    <option>K1 (5 yo)</option>
+                                    <option>K2 (5 yo)</option>
                                 </select>
                             </div>
                         </div>
@@ -616,14 +616,11 @@
                 $.ajax({
                         url: 'http://54.251.56.36:3000/api/v1/pre-registration/mfs-register',
                         type: 'POST',
+                        dataType: 'json',
+                        crossOrigin: true,
                         headers: { 
-                            'x-api-key': 'secret',
-                            'Access-Control-Allow-Credentials' : true,
-                            'Access-Control-Allow-Origin':'*',
-                            'Access-Control-Allow-Methods':'GET',
-                            'Access-Control-Allow-Headers':'application/json',
+                            'x-api-key': 'secret'
                         },
-                        //dataType: 'jsonp',
                         data: $("#form-mfs").serialize(),
                         success: function(data) {
                             console.log(data);
