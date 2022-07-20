@@ -317,67 +317,151 @@
                         <div class="field">
                             <label class="label">Preferred Centre (up to 3 - ranked in order)</label>
                             <div class="select">
-                                <select multiple class="select-centre" name="preferred_centre" style="width:200px;" required>
-                                    <option>Blk 491 Admiralty Link</option>
-                                    <option>Blk 113 Alkaff Crescent</option>
-                                    <option>Blk 302B Anchorvale Link</option>
-                                    <option>Blk 314A Anchorvale Link</option>
-                                    <option>Blk 332B Anchorvale Link</option>
-                                    <option>Blk 308C Anchorvale Road</option>
-                                    <option>Blk 331 Ang Mo Kio</option>
-                                    <option>Blk 209 Ang Mo Kio</option>
-                                    <option>Blk 229 Ang Mo Kio</option>
-                                    <option>Blk 329 Ang Mo Kio</option>
-                                    <option>Blk 343 Ang Mo Kio</option>
-                                    <option>Blk 571 Ang Mo Kio</option>
-                                    <option>Blk 601 Ang Mo Kio</option>
-                                    <option>Blk 541 Ang Mo Kio</option>
-                                    <option>Blk 222C Bedok North Drive</option>
-                                    <option>Blk 419 Bedok North</option>
-                                    <option>Blk 503 Bedok North</option>
-                                    <option>Blk 187 Bedok North</option>
-                                    <option>Blk 1 Bedok South</option>
-                                    <option>Blk 153 Bishan</option>
-                                    <option>Blk 236 Bishan</option>
-                                    <option>Blk 245 Bishan</option>
-                                    <option>Blk 197D Boon Lay</option>
-                                    <option>Blk 180B Boon Lay</option>
-                                    <option>Boon Lay Community Centre Level 4</option>
-                                    <option>Blk 997 Buangkok Crescent</option>
-                                    <option>Blk 260 Bukit Batok</option>
-                                    <option>Blk 291A Bukit Batok</option>
-                                    <option>Blk 438 Bukit Batok West</option>
-                                    <option>Blk 235 Bukit Panjang</option>
-                                    <option>Blk 120 Canberra Crescent</option>
-                                    <option>Blk 303 Canberra Road</option>
-                                    <option>Blk 109 Canberra Walk</option>
-                                    <option>Blk 52 Cassia Crescent</option>
-                                    <option>Blk 54 Chin Swee Road</option>
-                                    <option>Blk 815A Choa Chu Kang</option>
-                                    <option>Blk 490D Choa Chu Kang</option>
-                                    <option>Blk 208 Choa Chu Kang Central</option>
-                                    <option>Blk 212 Choa Chu Kang Central</option>
-                                    <option>Blk 684A Choa Chu Kang Crescent</option>
-                                    <option>Blk 602 Choa Chu Kang</option>
-                                    <option>Blk 82 Circuit Road</option>
-                                    <option>Blk 428 Clementi</option>
-                                    <option>Blk 375 Clementi</option>
-                                    <option>Blk 295A Compassvale Crescent</option>
-                                    <option>Blk 269 Compassvale Link</option>
-                                    <option>Blk 203D Compassvale Road</option>
-                                    <option>Blk 230 Compassvale Walk</option>
-                                    <option>Blk 126A Edgedale Plains</option>
-                                    <option>Blk 682B Edgedale Plains</option>
-                                    <option>Blk 119 Edgefield Plains</option>
-                                    <option>Blk 183 Edgefield Plains</option>
-                                    <option>Blk 443A Fajar Road, Fajar Hills</option>
-                                    <option>51 Fernvale Link (Large Childcare Centre at Sengkang West)</option>
-                                    <option>Blk 128 Geylang East</option>
-                                    <option>Guillemard Crescent</option>
-                                    <option>Blk 1 Haig Road</option>
-                                    <option>Blk 51 Havelock Rd</option>
-                                    <option>Blk 106 Henderson Crescent</option>
-                                    <option>Blk 18A Holland Drive</option>
+                                <select multiple class="select-centre" name="preferred_centre" style="width:300px;" required>
+                                    <option value="ALC">Blk 491 Admiralty Link</option>
+                                    <option value="AV2">Blk 302B Anchorvale Link</option>
+                                    <option value="AV3">Blk 314A Anchorvale Link</option>
+                                    <option value="AV5">Blk 332B Anchorvale Link</option>
+                                    <option value="AVC">Blk 308C Anchorvale Road</option>
+                                    <option value="MK5">Blk 331 Ang Mo Kio</option>
+                                    <option value="MK6">Blk 209 Ang Mo Kio</option>
+                                    <option value="MK8">Blk 229 Ang Mo Kio</option>
+                                    <option value="MK2">Blk 329 Ang Mo Kio</option>
+                                    <option value="AMK">Blk 343 Ang Mo Kio</option>
+                                    <option value="MK7">Blk 571 Ang Mo Kio</option>
+                                    <option value="MK4">Blk 601 Ang Mo Kio</option>
+                                    <option value="MK3">Blk 541 Ang Mo Kio</option>
+                                    <option value="BCC">Blk 419 Bedok North</option>
+                                    <option value="BC2">Blk 503 Bedok North</option>
+                                    <option value="BCC05">Blk 187 Bedok North</option>
+                                    <option value="BC3">Blk 1 Bedok South</option>
+                                    <option value="BS3">Blk 153 Bishan</option>
+                                    <option value="BS2">Blk 236 Bishan</option>
+                                    <option value="BSC">Blk 245 Bishan</option>
+                                    <option value="BL4">Blk 197D Boon Lay</option>
+                                    <option value="BL3">Blk 180B Boon Lay</option>
+                                    <option value="BLC">Boon Lay Community Centre Level 4</option>
+                                    <option value="BKC01">Blk 997 Buangkok Crescent</option>
+                                    <option value="BBC01">Blk 260 Bukit Batok</option>
+                                    <option value="BB2">Blk 291A Bukit Batok</option>
+                                    <option value="BBC04">Blk 438 Bukit Batok West</option>
+                                    <option value="BPC">Blk 235 Bukit Panjang</option>
+                                    <option value="CRC02">Blk 120 Canberra Crescent</option>
+                                    <option value="CRC">Blk 303 Canberra Road</option>
+                                    <option value="CCR01">Blk 52 Cassia Crescent</option>
+                                    <option value="CSC">Blk 54 Chin Swee Road</option>
+                                    <option value="CCK03">Blk 815A Choa Chu Kang</option>
+                                    <option value="CK2">Blk 208 Choa Chu Kang Central</option>
+                                    <option value="CCK">Blk 212 Choa Chu Kang Central</option>
+                                    <option value="CCK04">Blk 684A Choa Chu Kang Crescent</option>
+                                    <option value="YTC">Blk 602 Choa Chu Kang</option>
+                                    <option value="CIR01">Blk 82 Circuit Road</option>
+                                    <option value="CCC">Blk 428 Clementi</option>
+                                    <option value="CC3">Blk 375 Clementi</option>
+                                    <option value="CV2">Blk 295A Compassvale Crescent</option>
+                                    <option value="CV4">Blk 269 Compassvale Link</option>
+                                    <option value="CV3">Blk 203D Compassvale Road</option>
+                                    <option value="CVC">Blk 230 Compassvale Walk</option>
+                                    <option value="EDC">Blk 126A Edgedale Plains</option>
+                                    <option value="EDC02">Blk 682B Edgedale Plains</option>
+                                    <option value="EFC02">Blk 119 Edgefield Plains</option>
+                                    <option value="EFC">Blk 183 Edgefield Plains</option>
+                                    <option value="FRC01">Blk 443A Fajar Road, Fajar Hills</option>
+                                    <option value="SWC02">51 Fernvale Link (Large Childcare Centre at Sengkang West)</option>
+                                    <option value="GRC">Blk 128 Geylang East</option>
+                                    <option value="GCC">Guillemard Crescent</option>
+                                    <option value="HRC">Blk 1 Haig Road</option>
+                                    <option value="HVC01">Blk 51 Havelock Rd</option>
+                                    <option value="HDC">Blk 106 Henderson Crescent</option>
+                                    <option value="HLC">Blk 18A Holland Drive</option>
+                                    <option value="HC2">Blk 170 Hougang</option>
+                                    <option value="HCC">Blk 667 Hougang</option>
+                                    <option value="HC3">Blk 528 Hougang</option>
+                                    <option value="HC4">Blk 677 Hougang</option>
+                                    <option value="HCC05">Blk 706 Hougang</option>
+                                    <option value="PSC">Blk 950 Hougang</option>
+                                    <option value="BM2">Blk 137 Jalan Bukit Merah</option>
+                                    <option value="JSC">Blk 19 Jalan Sultan</option>
+                                    <option value="JEC">Blk 211 Jurong East</option>
+                                    <option value="JW7">Blk 681A Jurong West</option>
+                                    <option value="JPC">Jurong Point Shopping Centre</option>
+                                    <option value="JWC11">Blk 698C Jurong West</option>
+                                    <option value="JW8">Blk 459 Jurong West</option>
+                                    <option value="JW3">Blk 409 Jurong West</option>
+                                    <option value="JWC">Blk 518 Jurong West</option>
+                                    <option value="JW4">Blk 648C Jurong West</option>
+                                    <option value="JW6">Blk 656C Jurong West</option>
+                                    <option value="JW5">Blk 613 Jurong West</option>
+                                    <option value="JWC10">10 Jurong West (Large Childcare Centre at Jurong West)</option>
+                                    <option value="JW2">Blk 671A Jurong West</option>
+                                    <option value="JW9">Blk 756 Jurong West</option>
+                                    <option value="KBC">Blk 66 Kallang Bahru</option>
+                                    <option value="JCC">Blk 333 Kang Ching Road</option>
+                                    <option value="KKC">Blk 248 Kim Keat Link</option>
+                                    <option value="PWC">80 Marine Parade Road</option>
+                                    <option value="MTC">Blk 18 Marine Terrace</option>
+                                    <option value="MNC">Blk 111 McNair Road</option>
+                                    <option value="PR2">Blk 487 Pasir Ris</option>
+                                    <option value="PRS">Blk 637 Pasir Ris</option>
+                                    <option value="PR4">Blk 197 Pasir Ris</option>
+                                    <option value="PR5">Blk 524C Pasir Ris</option>
+                                    <option value="PR3">Blk 568 Pasir Ris</option>
+                                    <option value="PTC">Blk 134 Potong Pasir</option>
+                                    <option value="WWP">Waterway Point</option>
+                                    <option value="PCC">Blk 166 Punggol Central</option>
+                                    <option value="PCC07">Punggol Drive - Early Years Centre (0-4 years old)</option>
+                                    <option value="PCC08">Blk 659A Punggol East - Early Years Centre (0-4 years old)</option>
+                                    <option value="PC2">Blk 267A Punggol Field</option>
+                                    <option value="PC4">Blk 208B Punggol Place</option>
+                                    <option value="PC5">Blk 209A Punggol Place</option>
+                                    <option value="PC3">Blk 306A Punggol Place</option>
+                                    <option value="PCC10">6 New Punggol Road</option>
+                                    <option value="RVC03">49 Rivervale Crescent (Large Childcare Centre at Rivervale Crescent)</option>
+                                    <option value="RVC">Blk 153 Rivervale Crescent</option>
+                                    <option value="RVC02">Blk 164 Rivervale Crescent</option>
+                                    <option value="SKC">Blk 101 Rivervale Walk</option>
+                                    <option value="SGC02">6 Segar Road</option>
+                                    <option value="SGC">Blk 487 Segar Rd</option>
+                                    <option value="SCC">Blk 331 Sembawang Close</option>
+                                    <option value="SWC">50 Sengkang West Way</option>
+                                    <option value="SJC">Blk 654 Senja Rd</option>
+                                    <option value="SN3">Blk 306 Serangoon</option>
+                                    <option value="SN2">Blk 219 Serangoon</option>
+                                    <option value="SN4">Braddell Heights Community Hub</option>
+                                    <option value="SNC">Blk 140 Serangoon North</option>
+                                    <option value="TM2">Blk 135 Simei</option>
+                                    <option value="EPC">Eastpoint Mall</option>
+                                    <option value="SMC">Blk 82 Strathmore Avenue</option>
+                                    <option value="PC6">Blk 312C Sumang Link</option>
+                                    <option value="PCC09">Blk 322D Sumang Walk - Early Years Centre (0-4 years old)</option>
+                                    <option value="TM3">Blk 803 Tampines</option>
+                                    <option value="TM4">Blk 341 Tampines</option>
+                                    <option value="TMC">Blk 487C Tampines</option>
+                                    <option value="TJP">Blk 2 Tanjong Pagar Plaza</option>
+                                    <option value="TBC">Blk 63 Telok Blangah Heights</option>
+                                    <option value="TP5">Blk 236 Toa Payoh</option>
+                                    <option value="TPC">Blk 192 Toa Payoh</option>
+                                    <option value="TP2">Blk 55 Toa Payoh</option>
+                                    <option value="TP3">Blk 14A Toa Payoh</option>
+                                    <option value="TP4">Blk 219 Toa Payoh</option>
+                                    <option value="WEL">Blk 507A Wellington Circle</option>
+                                    <option value="WGC">Westgate</option>
+                                    <option value="WPC">Blk 85 Whampoa Drive</option>
+                                    <option value="WP2">Blk 49 Whampoa South</option>
+                                    <option value="WGS01">Wisma Geylang Serai</option>
+                                    <option value="WDC">Blk 347 Woodlands</option>
+                                    <option value="WD6">Blk 678 Woodlands</option>
+                                    <option value="WD4">Blk 742 Woodlands Circle</option>
+                                    <option value="WD3">Blk 688C Woodlands</option>
+                                    <option value="WDC07">Kampung Admiralty</option>
+                                    <option value="WDC08">Blk 785E Woodlands Rise</option>
+                                    <option value="WD2">Blk 406 Woodlands</option>
+                                    <option value="WCC">Blk 848 Woodlands</option>
+                                    <option value="YCC05">Blk 509B Yishun</option>
+                                    <option value="YC4">Blk 423 Yishun</option>
+                                    <option value="YCC">Blk 796A Yishun Ring</option>
+                                    <option value="YC2">Blk 612 Yishun</option>
+                                    <option value="YAC">505 Yung An Road</option>
                                 </select>
                             </div>
                         </div>
@@ -460,7 +544,7 @@
                         <div class="field">
                             <label class="label">Marketing Consent</label>
                             <div class="select">
-                                <select multiple class="select-consent" name="marketing_consent" style="width:200px;" required>
+                                <select multiple class="select-consent" name="marketing_consent" style="width:300px;" required>
                                     <option>All</option>
                                     <option>Email</option>
                                     <option>SMS</option>
@@ -496,26 +580,27 @@
     </div>
 
     <script type="text/javascript">
-      /* exported gapiLoaded */
-      /* exported gisLoaded */
-      /* exported handleAuthClick */
-      /* exported handleSignoutClick */
+        /* exported gapiLoaded */
+        /* exported gisLoaded */
+        /* exported handleAuthClick */
+        /* exported handleSignoutClick */
 
-      // TODO(developer): Set to client ID and API key from the Developer Console
-      const CLIENT_ID = '131782059606-38o5llf96b9f45kodikj3vftmshg1bjr.apps.googleusercontent.com';
-      const API_KEY = 'AIzaSyBswKtyy4lFEze5R8LRxLyQ_P88dAA_2Bs';
+        // TODO(developer): Set to client ID and API key from the Developer Console
+        const CLIENT_ID = '131782059606-38o5llf96b9f45kodikj3vftmshg1bjr.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyBswKtyy4lFEze5R8LRxLyQ_P88dAA_2Bs';
 
 
-      // Discovery doc URL for APIs used by the quickstart
-      const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/people/v1/rest';
+        // Discovery doc URL for APIs used by the quickstart
+        const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/people/v1/rest';
 
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      const SCOPES = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        const SCOPES = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
 
-      let tokenClient;
-      let gapiInited = false;
-      let gisInited = false;
+        var token;
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
 
         
             document.getElementById('authorize_button').style.visibility = 'hidden';
@@ -579,46 +664,61 @@
       }
 
     $( document ).ready(function() {
+        if(sessionStorage.getItem("nfc-mfs-token")){
+            if (gapiInited && gisInited) {
+                displayItemsWhenSignedIn();
+            }
+        }
 
       /**
        *  Sign in the user upon button click.
        */
-      function handleAuthClick() {
-        tokenClient.callback = async (resp) => {
-          if (resp.error !== undefined) {
-            throw (resp);
-          }
-          document.getElementById('signout_button').style.visibility = 'visible';
-          document.getElementById('authorize_button').innerText = 'Refresh';
-          //await listConnectionNames();
-          loadPerson();
-        };
 
-        if (gapi.client.getToken() === null) {
-          // Prompt the user to select a Google Account and ask for consent to share their data
-          // when establishing a new session.
-          tokenClient.requestAccessToken({prompt: 'consent'});
-        } else {
-          // Skip display of account chooser and consent dialog for an existing session.
-          tokenClient.requestAccessToken({prompt: ''});
+        function displayItemsWhenSignedIn(){
+            document.getElementById('signout_button').style.visibility = 'visible';
+            document.getElementById('authorize_button').innerText = 'Refresh';
+            loadPerson();
         }
-      }
+        function handleAuthClick() {
+            tokenClient.callback = async (resp) => {
+              if (resp.error !== undefined) {
+                throw (resp);
+              }
+              displayItemsWhenSignedIn();
+            };
+
+            if (gapi.client.getToken() === null) {
+              // Prompt the user to select a Google Account and ask for consent to share their data
+              // when establishing a new session.
+              tokenClient.requestAccessToken({prompt: 'consent'});
+            } else {
+              // Skip display of account chooser and consent dialog for an existing session.
+              tokenClient.requestAccessToken({prompt: ''});
+            }
+        }
 
       /**
        *  Sign out the user upon button click.
        */
       function handleSignoutClick() {
-        const token = gapi.client.getToken();
+        token = gapi.client.getToken();
         if (token !== null) {
           google.accounts.oauth2.revoke(token.access_token);
           gapi.client.setToken('');
           document.getElementById('content').innerText = '';
           document.getElementById('authorize_button').innerText = 'Authorize';
           document.getElementById('signout_button').style.visibility = 'hidden';
+
+          sessionStorage.removeItem("nfc-mfs-token");
+          sessionStorage.removeItem("nfc-mfs-name");
+          sessionStorage.removeItem("nfc-mfs-email");
         }
       }
 
       function loadPerson() {
+        token = gapi.client.getToken();
+        sessionStorage.setItem("nfc-mfs-token", token.access_token);
+
         gapi.client.people.people.get({
           'resourceName': 'people/me',
           'requestMask.includeField': 'person.names,person.emailAddresses'
@@ -626,6 +726,9 @@
           var p = document.createElement('p');
           var name = resp.result.names[0].givenName;
           var email = resp.result.emailAddresses[0].value;
+
+          sessionStorage.setItem("nfc-mfs-name", name);
+          sessionStorage.setItem("nfc-mfs-email", email);
 
 
             document.getElementById('form-container').style.display = 'block';
