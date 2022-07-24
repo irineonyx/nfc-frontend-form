@@ -47,7 +47,7 @@
     <button id="authorize_button">Sign In To Authorize</button>
     <button id="signout_button">Sign Out</button>
 
-    <div id="form-container" class="container" style="display: none;">
+    <div id="form-container" class="container" style="display: true;">
         <div class="content form-group">
             <section class="hero is-light">
                 <div class="hero-head">
@@ -488,7 +488,7 @@
                         <div class="field">
                             <label class="label">Referral Information</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="" name="referral" required>
+                                <input class="input" type="text" placeholder="" name="referral">
                             </div>
                         </div>
 
@@ -520,7 +520,7 @@
                                 <div class="field">
                                     <label class="label">Centre of Visit</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="centre_visit" required>
+                                        <input class="input" type="datetime-local" placeholder="" name="centre_visit" required>
                                     </div>
                                 </div>
                             </div>
@@ -558,7 +558,8 @@
 
                     <div class="field">
                         <div class="control">
-                            <button class="button is-success" type="submit">Submit MFS Application</button>
+                            <button class="button is-success" type="submit" id="realButton">Submit MFS Application</button>
+                            <button class="button is-success" disabled type="submit" id="loadingButton">Loading .....</button>
                         </div>
                     </div>
                     
@@ -747,7 +748,8 @@
                 handleSignoutClick();
             });
 
-        
+            $("#loadingButton").hide();
+
             $(".select-centre").selectize({
               maxItems: 3,
             });
@@ -791,7 +793,10 @@
                   //     email: "Your email address must be in the format of name@domain.com"
                   //   }
                   // }
+                  
                     submitHandler: function(form) {
+                       
+
                         $.ajax({
                             url: 'https://nfc-api.onyxisland.com/api/v1/mfs-registration/mfs-register',
                             type: 'POST',
@@ -801,12 +806,20 @@
                                 'x-api-key': 'secret'
                             },
                             data: $("#form-mfs").serialize(),
+                            beforeSend: function() {
+                                $("#loadingButton").show();
+                                $("#realButton").hide();
+                            },
                             success: function(data) {
                                 console.log(data);
                                 if(data.code == '200'){
+                                    $("#loadingButton").hide();
+                                    $("#realButton").show();
                                     showModalSuccess();
                                 }
                                 else{
+                                    $("#loadingButton").hide();
+                                    $("#realButton").show();
                                     showModalFailed();
                                 }
                             }
