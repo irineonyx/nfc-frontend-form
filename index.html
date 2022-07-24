@@ -19,6 +19,9 @@
       input[type=date]{
         width: 200px;
       }
+      .select-multiple{
+        height: auto !important;
+      }
       .tabs ul{
         margin:  0;
       }
@@ -47,7 +50,7 @@
     <button id="authorize_button">Sign In To Authorize</button>
     <button id="signout_button">Sign Out</button>
 
-    <div id="form-container" class="container" style="display: none;">
+    <div id="form-container" class="container" style="display: block;">
         <div class="content form-group">
             <section class="hero is-light">
                 <div class="hero-head">
@@ -72,7 +75,7 @@
                                 <div class="field">
                                     <label class="label">Salutation</label>
                                     <div class="select">
-                                        <select name="parent_salutation" required>
+                                        <select name="parent_salutation">
                                             <option>Mr</option>
                                             <option>Ms</option>
                                             <option>Madm</option>
@@ -113,14 +116,14 @@
                         <div class="field">
                             <label class="label">NRIC / FIN / Passport No.</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="NRIC / FIN / Passport No." name="parent_identify_no" required>
+                                <input class="input" type="text" placeholder="NRIC / FIN / Passport No." name="parent_identify_no" minlength="8">
                             </div>
                         </div>
 
                         <div class="field">
                             <label class="label">Relationship to Child</label>
                             <div class="select">
-                                <select name="relationship_to_child" required>
+                                <select name="relationship_to_child">
                                     <option>Mother</option>
                                     <option>Father</option>
                                     <option>MSF Foster Parent</option>
@@ -143,7 +146,7 @@
                                 <div class="field">
                                     <label class="label">Street Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="street_name" required>
+                                        <input class="input" type="text" placeholder="" name="street_name">
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +154,7 @@
                                 <div class="field">
                                     <label class="label">Building Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="building_name" required>
+                                        <input class="input" type="text" placeholder="" name="building_name">
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +164,7 @@
                                 <div class="field">
                                     <label class="label">Block No.</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="block_no" required>
+                                        <input class="input" type="text" placeholder="" name="block_no">
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +172,7 @@
                                 <div class="field">
                                     <label class="label">Floor No.</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="floor_no" required>
+                                        <input class="input" type="text" placeholder="" name="floor_no">
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +180,7 @@
                                 <div class="field">
                                     <label class="label">Unit No.</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="unit_no" required>
+                                        <input class="input" type="text" placeholder="" name="unit_no">
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +204,7 @@
                         <div class="field">
                             <label class="label">Expected delivery date</label>
                             <div class="control">
-                                <input class="input" type="date" placeholder="" name="expected_delivery_date" required>
+                                <input class="input" type="date" placeholder="" name="expected_delivery_date">
                             </div>
                         </div>
 
@@ -210,7 +213,7 @@
                                 <div class="field">
                                     <label class="label">Child's Full Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="child_full_name" required>
+                                        <input class="input" type="text" placeholder="" name="child_full_name">
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +221,7 @@
                                 <div class="field">
                                     <label class="label">Child's Date of Birth</label>
                                     <div class="control">
-                                        <input class="input" type="date" placeholder="" name="child_dob" required>
+                                        <input class="input" type="date" placeholder="" name="child_dob">
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +244,7 @@
                                 <div class="field">
                                     <label class="label">Child's Nationality</label>
                                     <div class="select">
-                                        <select name="child_nationality" required>
+                                        <select name="child_nationality">
                                             <option>Singapore Citizen</option>
                                             <option>Permanent Resident</option>
                                             <option>Foreigner</option>
@@ -254,7 +257,7 @@
                         <div class="field">
                             <label class="label">Child's Birth Cert / FIN / Student Pass</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="" name="child_identify_no" required>
+                                <input class="input" type="text" placeholder="" name="child_identify_no" minlength="8">
                             </div>
                         </div>
 
@@ -316,7 +319,7 @@
 
                         <div class="field">
                             <label class="label">Preferred Centre (up to 3 - ranked in order)</label>
-                            <div class="select">
+                            <div class="select select-multiple">
                                 <select multiple class="select-centre" name="preferred_centre" style="width:300px;" required>
                                     <option value="ALC">Blk 491 Admiralty Link</option>
                                     <option value="AV2">Blk 302B Anchorvale Link</option>
@@ -488,14 +491,14 @@
                         <div class="field">
                             <label class="label">Referral Information</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="" name="referral" required>
+                                <input class="input" type="text" placeholder="" name="referral">
                             </div>
                         </div>
 
                         <div class="field">
                             <label class="label">Workplace Association</label>
                             <div class="select">
-                                <select name="workplace_association" required>
+                                <select name="workplace_association">
                                     <option>LSH</option>
                                     <option>MFS</option>
                                     <option>NTUC</option>
@@ -520,7 +523,7 @@
                                 <div class="field">
                                     <label class="label">Centre of Visit</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="" name="centre_visit" required>
+                                        <input class="input" type="text" placeholder="" name="centre_visit">
                                     </div>
                                 </div>
                             </div>
@@ -528,7 +531,7 @@
                                 <div class="field">
                                     <label class="label">Date of Centre Visit</label>
                                     <div class="control">
-                                        <input class="input" type="date" placeholder="" name="centre_visit_date" required>
+                                        <input class="input" type="date" placeholder="" name="centre_visit_date">
                                     </div>
                                 </div>
                             </div>
@@ -537,13 +540,13 @@
                         <div class="field">
                             <label class="label">Notes</label>
                             <div class="control">
-                                <textarea class="textarea" placeholder="Your notes here" name="notes" required></textarea>
+                                <textarea class="textarea" placeholder="Your notes here" name="notes"></textarea>
                             </div>
                         </div>
 
                         <div class="field">
                             <label class="label">Marketing Consent</label>
-                            <div class="select">
+                            <div class="select select-multiple">
                                 <select multiple class="select-consent" name="marketing_consent" style="width:300px;" required>
                                     <option>All</option>
                                     <option>Email</option>
@@ -780,42 +783,90 @@
                 $(".submit-message").html('Something wrong when saving your data');
             }
 
-            $("#form-mfs").submit(function(e) {
-                e.preventDefault();
+            $("#form-mfs").validate({
+              // messages: {
+              //   name: "Please specify your name",
+              //   email: {
+              //     required: "We need your email address to contact you",
+              //     email: "Your email address must be in the format of name@domain.com"
+              //   }
+              // }
+                submitHandler: function(form) {
+                    //http://54.251.56.36
+                    //https://nfc-api.onyxisland.com
+                    // $.ajax({
+                    //     url: 'http://54.251.56.36/api/v1/mfs-registration/mfs-register',
+                    //     type: 'POST',
+                    //     dataType: 'json',
+                    //     crossOrigin: true,
+                    //     headers: { 
+                    //         'x-api-key': 'secret'
+                    //     },
+                    //     data: $("#form-mfs").serialize(),
+                    //     success: function(data) {
+                    //         console.log(data);
+                    //         if(data.code == '200'){
+                    //             showModalSuccess();
+                    //         }
+                    //         else{
+                    //             showModalFailed();
+                    //         }
+                    //     }
+                    // });
 
-                $("#form-mfs").validate({
-                  // messages: {
-                  //   name: "Please specify your name",
-                  //   email: {
-                  //     required: "We need your email address to contact you",
-                  //     email: "Your email address must be in the format of name@domain.com"
-                  //   }
-                  // }
-                    submitHandler: function(form) {
-                        $.ajax({
-                            url: 'https://nfc-api.onyxisland.com/api/v1/mfs-registration/mfs-register',
-                            type: 'POST',
-                            dataType: 'json',
-                            crossOrigin: true,
-                            headers: { 
-                                'x-api-key': 'secret'
-                            },
-                            data: $("#form-mfs").serialize(),
-                            success: function(data) {
-                                console.log(data);
-                                if(data.code == '200'){
-                                    showModalSuccess();
-                                }
-                                else{
-                                    showModalFailed();
-                                }
+                    $.ajax({
+                        url: 'https://nfc-api.onyxisland.com/api/v1/mfs-registration/mfs-register',
+                        type: 'POST',
+                        dataType: 'json',
+                        crossOrigin: true,
+                        headers: { 
+                            'x-api-key': 'secret'
+                        },
+                        data: {
+                            parent_salutation: $("select[name='parent_salutation']").val(),
+                            parent_full_name: $("input[name='parent_full_name']").val(),
+                            parent_email: $("input[name='parent_email']").val(),
+                            parent_phone: $("input[name='parent_phone']").val(),
+                            parent_identify_no: $("input[name='parent_identify_no']").val(),
+                            relationship_to_child: $("select[name='relationship_to_child']").val(),
+                            postal_code: $("input[name='postal_code']").val(),
+                            street_name: $("input[name='street_name']").val(),
+                            building_name: $("input[name='building_name']").val(),
+                            block_no: $("input[name='block_no']").val(),
+                            floor_no: $("input[name='floor_no']").val(),
+                            unit_no: $("input[name='unit_no']").val(),
+                            child_status: $("select[name='child_status']").val(),
+                            expected_delivery_date: $("input[name='expected_delivery_date']").val(),
+                            child_full_name: $("input[name='child_full_name']").val(),
+                            child_dob: $("input[name='child_dob']").val(),
+                            child_gender: $("input[name='child_gender']").val(),
+                            child_nationality: $("select[name='child_nationality']").val(),
+                            child_identify_no: $("input[name='child_identify_no']").val(),
+                            start_date: $("input[name='start_date']").val(),
+                            service_level: $("select[name='service_level']").val(),
+                            lead_source: $("select[name='lead_source']").val(),
+                            programme_type: $("select[name='programme_type']").val(),
+                            preferred_centre: $("select[name='preferred_centre']").val(),
+                            income: $("select[name='income']").val(),
+                            referral: $("input[name='referral']").val(),
+                            workplace_association: $("select[name='workplace_association']").val(),
+                            centre_visit_option: $("input[name='centre_visit_option']").val(),
+                            centre_visit: $("input[name='centre_visit']").val(),
+                            centre_visit_date: $("input[name='centre_visit_date']").val(),
+                            notes: $("textarea[name='notes']").val(),
+                            marketing_consent: $("select[name='marketing_consent']").val().toString(),
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            if(data.code == '200'){
+                                showModalSuccess();
                             }
-                        });
-                    }
-                });
-
-                
-
+                            else{
+                                showModalFailed();
+                            }
+                        }
+                    });
+                }
             });
 
             $(".modal-background, .btn-close").click(function() {
