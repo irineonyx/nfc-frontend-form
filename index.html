@@ -474,7 +474,7 @@
                             <div class="select">
                                 <select name="income" required>
                                     <option selected disabled>Choose income range</option>
-                                    <option>2500 & below</option>
+                                    <option>2500 & Below</option>
                                     <option>2501 to 3000</option>
                                     <option>3001 to 3500</option>
                                     <option>3501 to 4000</option>
@@ -561,7 +561,8 @@
 
                     <div class="field">
                         <div class="control">
-                            <button class="button is-success" type="submit">Submit MFS Application</button>
+                            <button class="button is-success" type="submit" id="realButton">Submit MFS Application</button>
+                            <button class="button is-success" disabled type="submit" id="loadingButton">Loading .....</button>
                         </div>
                     </div>
                     
@@ -750,7 +751,8 @@
                 handleSignoutClick();
             });
 
-        
+            $("#loadingButton").hide();
+
             $(".select-centre").selectize({
               maxItems: 3,
             });
@@ -859,11 +861,15 @@
                         success: function(data) {
                             console.log(data);
                             if(data.code == '200'){
-                                showModalSuccess();
-                            }
-                            else{
-                                showModalFailed();
-                            }
+                                    $("#loadingButton").hide();
+                                    $("#realButton").show();
+                                    showModalSuccess();
+                                }
+                                else{
+                                    $("#loadingButton").hide();
+                                    $("#realButton").show();
+                                    showModalFailed();
+                                }
                         }
                     });
                 }
