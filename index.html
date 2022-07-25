@@ -44,6 +44,9 @@
       .fa-circle-xmark{
         color: crimson;
       }
+      .check-marketing-label{
+        margin-right: 10px;
+      }
     </style>
 
     <!--Add buttons to initiate auth sequence and sign out-->
@@ -76,6 +79,7 @@
                                     <label class="label">Salutation</label>
                                     <div class="select">
                                         <select name="parent_salutation">
+                                            <option selected disabled>Choose salutation</option>
                                             <option>Mr</option>
                                             <option>Ms</option>
                                             <option>Madm</option>
@@ -124,6 +128,7 @@
                             <label class="label">Relationship to Child</label>
                             <div class="select">
                                 <select name="relationship_to_child">
+                                    <option selected disabled>Choose relationship</option>
                                     <option>Mother</option>
                                     <option>Father</option>
                                     <option>MSF Foster Parent</option>
@@ -247,6 +252,7 @@
                                         <label class="label">Child's Nationality</label>
                                         <div class="select">
                                             <select name="child_nationality">
+                                                <option selected disabled>Choose nationality</option>
                                                 <option>Singapore Citizen</option>
                                                 <option>Permanent Resident</option>
                                                 <option>Foreigner</option>
@@ -276,12 +282,12 @@
                             <label class="label">Service Level</label>
                             <div class="select">
                                 <select name="service_level" required>
-                                    <option>Infant (2 - 17 mths)</option>
-                                    <option>PlayGroup (18 - 30 mths)</option>
-                                    <option>N1 (3 yo)</option>
-                                    <option>N2 (4 yo)</option>
-                                    <option>K1 (5 yo)</option>
-                                    <option>K2 (5 yo)</option>
+                                    <option value="Infant">Infant (2 - 17 mths)</option>
+                                    <option value="PlayGroup">PlayGroup (18 - 30 mths)</option>
+                                    <option value="N1">N1 (3 yo)</option>
+                                    <option value="N2">N2 (4 yo)</option>
+                                    <option value="K1">K1 (5 yo)</option>
+                                    <option value="K2">K2 (5 yo)</option>
                                 </select>
                             </div>
                         </div>
@@ -550,7 +556,24 @@
 
                         <div class="field">
                             <label class="label">Marketing Consent</label>
-                            <div class="select select-multiple">
+                            <div class="control">
+                                <label class="checkbox check-marketing-label">
+                                  <input type="checkbox" id="check-marketing-all"> All
+                                </label>
+                                <label class="checkbox check-marketing-label">
+                                  <input type="checkbox" class="marketing-item" name="marketing_consent[]" value="Email"> Email
+                                </label>
+                                <label class="checkbox check-marketing-label">
+                                  <input type="checkbox" class="marketing-item" name="marketing_consent[]" value="SMS"> SMS
+                                </label>
+                                <label class="checkbox check-marketing-label">
+                                  <input type="checkbox" class="marketing-item" name="marketing_consent[]" value="Phone"> Phone
+                                </label>
+                                <label class="checkbox check-marketing-label">
+                                  <input type="checkbox" class="marketing-item" name="marketing_consent[]" value="App"> App
+                                </label>
+                            </div>
+                            <!-- <div class="select select-multiple">
                                 <select multiple class="select-consent" name="marketing_consent" style="width:300px;" required>
                                     <option>All</option>
                                     <option>Email</option>
@@ -558,7 +581,7 @@
                                     <option>Phone</option>
                                     <option>App</option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- end section enquiry details -->
@@ -811,6 +834,14 @@
                 }
             });
 
+            //marketing consent
+            $("#check-marketing-all").click(function() {
+                $(".marketing-item").prop("checked", $(this).prop("checked"));
+            });
+            $(".marketing-item").click(function() {
+                $("#check-marketing-all").prop("checked", false);
+            });
+
             $("#form-mfs").validate({
               // messages: {
               //   name: "Please specify your name",
@@ -822,26 +853,6 @@
                 submitHandler: function(form) {
                     //http://54.251.56.36
                     //https://nfc-api.onyxisland.com
-                    // $.ajax({
-                    //     url: 'http://54.251.56.36/api/v1/mfs-registration/mfs-register',
-                    //     type: 'POST',
-                    //     dataType: 'json',
-                    //     crossOrigin: true,
-                    //     headers: { 
-                    //         'x-api-key': 'secret'
-                    //     },
-                    //     data: $("#form-mfs").serialize(),
-                    //     success: function(data) {
-                    //         console.log(data);
-                    //         if(data.code == '200'){
-                    //             showModalSuccess();
-                    //         }
-                    //         else{
-                    //             showModalFailed();
-                    //         }
-                    //     }
-                    // });
-
                     $.ajax({
                         url: 'https://nfc-api.onyxisland.com/api/v1/mfs-registration/mfs-register',
                         type: 'POST',
@@ -850,54 +861,78 @@
                         headers: { 
                             'x-api-key': 'secret'
                         },
-                        data: {
-                            parent_salutation: $("select[name='parent_salutation']").val(),
-                            parent_full_name: $("input[name='parent_full_name']").val(),
-                            parent_email: $("input[name='parent_email']").val(),
-                            parent_phone: $("input[name='parent_phone']").val(),
-                            parent_identify_no: $("input[name='parent_identify_no']").val(),
-                            relationship_to_child: $("select[name='relationship_to_child']").val(),
-                            postal_code: $("input[name='postal_code']").val(),
-                            street_name: $("input[name='street_name']").val(),
-                            building_name: $("input[name='building_name']").val(),
-                            block_no: $("input[name='block_no']").val(),
-                            floor_no: $("input[name='floor_no']").val(),
-                            unit_no: $("input[name='unit_no']").val(),
-                            child_status: $("select[name='child_status']").val(),
-                            expected_delivery_date: $("input[name='expected_delivery_date']").val(),
-                            child_full_name: $("input[name='child_full_name']").val(),
-                            child_dob: $("input[name='child_dob']").val(),
-                            child_gender: $("input[name='child_gender']").val(),
-                            child_nationality: $("select[name='child_nationality']").val(),
-                            child_identify_no: $("input[name='child_identify_no']").val(),
-                            start_date: $("input[name='start_date']").val(),
-                            service_level: $("select[name='service_level']").val(),
-                            lead_source: $("select[name='lead_source']").val(),
-                            programme_type: $("select[name='programme_type']").val(),
-                            preferred_centre: $("select[name='preferred_centre']").val(),
-                            income: $("select[name='income']").val(),
-                            referral: $("input[name='referral']").val(),
-                            workplace_association: $("select[name='workplace_association']").val(),
-                            centre_visit_option: $("input[name='centre_visit_option']").val(),
-                            centre_visit: $("input[name='centre_visit']").val(),
-                            centre_visit_date: $("input[name='centre_visit_date']").val(),
-                            notes: $("textarea[name='notes']").val(),
-                            marketing_consent: $("select[name='marketing_consent']").val(),
-                        },
+                        data: $("#form-mfs").serialize(),
                         success: function(data) {
                             console.log(data);
                             if(data.code == '200'){
-                                    $("#loadingButton").hide();
-                                    $("#realButton").show();
-                                    showModalSuccess();
-                                }
-                                else{
-                                    $("#loadingButton").hide();
-                                    $("#realButton").show();
-                                    showModalFailed();
-                                }
+                                $("#loadingButton").hide();
+                                $("#realButton").show();
+                                showModalSuccess();
+                            }
+                            else{
+                                $("#loadingButton").hide();
+                                $("#realButton").show();
+                                showModalFailed();
+                            }
                         }
                     });
+
+                    // $.ajax({
+                    //     url: 'https://nfc-api.onyxisland.com/api/v1/mfs-registration/mfs-register',
+                    //     type: 'POST',
+                    //     dataType: 'json',
+                    //     crossOrigin: true,
+                    //     headers: { 
+                    //         'x-api-key': 'secret'
+                    //     },
+                    //     data: {
+                    //         parent_salutation: $("select[name='parent_salutation']").val(),
+                    //         parent_full_name: $("input[name='parent_full_name']").val(),
+                    //         parent_email: $("input[name='parent_email']").val(),
+                    //         parent_phone: $("input[name='parent_phone']").val(),
+                    //         parent_identify_no: $("input[name='parent_identify_no']").val(),
+                    //         relationship_to_child: $("select[name='relationship_to_child']").val(),
+                    //         postal_code: $("input[name='postal_code']").val(),
+                    //         street_name: $("input[name='street_name']").val(),
+                    //         building_name: $("input[name='building_name']").val(),
+                    //         block_no: $("input[name='block_no']").val(),
+                    //         floor_no: $("input[name='floor_no']").val(),
+                    //         unit_no: $("input[name='unit_no']").val(),
+                    //         child_status: $("select[name='child_status']").val(),
+                    //         expected_delivery_date: $("input[name='expected_delivery_date']").val(),
+                    //         child_full_name: $("input[name='child_full_name']").val(),
+                    //         child_dob: $("input[name='child_dob']").val(),
+                    //         child_gender: $("input[name='child_gender']").val(),
+                    //         child_nationality: $("select[name='child_nationality']").val(),
+                    //         child_identify_no: $("input[name='child_identify_no']").val(),
+                    //         start_date: $("input[name='start_date']").val(),
+                    //         service_level: $("select[name='service_level']").val(),
+                    //         lead_source: $("select[name='lead_source']").val(),
+                    //         programme_type: $("select[name='programme_type']").val(),
+                    //         preferred_centre: $("select[name='preferred_centre']").val(),
+                    //         income: $("select[name='income']").val(),
+                    //         referral: $("input[name='referral']").val(),
+                    //         workplace_association: $("select[name='workplace_association']").val(),
+                    //         centre_visit_option: $("input[name='centre_visit_option']").val(),
+                    //         centre_visit: $("input[name='centre_visit']").val(),
+                    //         centre_visit_date: $("input[name='centre_visit_date']").val(),
+                    //         notes: $("textarea[name='notes']").val(),
+                    //         marketing_consent: $("select[name='marketing_consent']").val(),
+                    //     },
+                    //     success: function(data) {
+                    //         console.log(data);
+                    //         if(data.code == '200'){
+                    //                 $("#loadingButton").hide();
+                    //                 $("#realButton").show();
+                    //                 showModalSuccess();
+                    //             }
+                    //             else{
+                    //                 $("#loadingButton").hide();
+                    //                 $("#realButton").show();
+                    //                 showModalFailed();
+                    //             }
+                    //     }
+                    // });
                 }
             });
 
