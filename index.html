@@ -114,7 +114,7 @@
                         </div>
 
                         <div class="field">
-                            <label class="label">NRIC / FIN / Passport No.</label>
+                            <label class="label">NRIC / FIN / Passport No. (Optional)</label>
                             <div class="control">
                                 <input class="input" type="text" placeholder="NRIC / FIN / Passport No." name="parent_identify_no" minlength="8">
                             </div>
@@ -144,7 +144,7 @@
                         <div class="columns">
                             <div class="column">
                                 <div class="field">
-                                    <label class="label">Street Name</label>
+                                    <label class="label">Street Name (Optional)</label>
                                     <div class="control">
                                         <input class="input" type="text" placeholder="" name="street_name">
                                     </div>
@@ -152,7 +152,7 @@
                             </div>
                             <div class="column">
                                 <div class="field">
-                                    <label class="label">Building Name</label>
+                                    <label class="label">Building Name (Optional)</label>
                                     <div class="control">
                                         <input class="input" type="text" placeholder="" name="building_name">
                                     </div>
@@ -162,7 +162,7 @@
                         <div class="columns">
                             <div class="column">
                                 <div class="field">
-                                    <label class="label">Block No.</label>
+                                    <label class="label">Block No. (Optional)</label>
                                     <div class="control">
                                         <input class="input" type="text" placeholder="" name="block_no">
                                     </div>
@@ -170,7 +170,7 @@
                             </div>
                             <div class="column">
                                 <div class="field">
-                                    <label class="label">Floor No.</label>
+                                    <label class="label">Floor No. (Optional)</label>
                                     <div class="control">
                                         <input class="input" type="text" placeholder="" name="floor_no">
                                     </div>
@@ -178,7 +178,7 @@
                             </div>
                             <div class="column">
                                 <div class="field">
-                                    <label class="label">Unit No.</label>
+                                    <label class="label">Unit No. (Optional)</label>
                                     <div class="control">
                                         <input class="input" type="text" placeholder="" name="unit_no">
                                     </div>
@@ -194,7 +194,8 @@
                         <div class="field">
                             <label class="label">Is the child born or unborn</label>
                             <div class="select" >
-                                <select name="child_status" required>
+                                <select id="child-status" name="child_status" required>
+                                    <option selected disabled>Choose child born/unborn</option>
                                     <option value="born">Born</option>
                                     <option value="unborn">Unborn</option>
                                 </select>
@@ -208,58 +209,61 @@
                             </div>
                         </div>
 
-                        <div class="columns">
-                            <div class="column">
-                                <div class="field">
-                                    <label class="label">Child's Full Name</label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="" name="child_full_name">
+                        <div class="child-optional-group" style="display:none;">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Child's Full Name</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="" name="child_full_name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Child's Date of Birth</label>
+                                        <div class="control">
+                                            <input class="input" type="date" placeholder="" name="child_dob">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="column">
-                                <div class="field">
-                                    <label class="label">Child's Date of Birth</label>
-                                    <div class="control">
-                                        <input class="input" type="date" placeholder="" name="child_dob">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Child's Gender</label>
+                                        <div class="control">
+                                            <label class="radio">
+                                                <input type="radio" name="child_gender" value="Male"> Male
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="child_gender" value="Female"> Female
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Child's Nationality</label>
+                                        <div class="select">
+                                            <select name="child_nationality">
+                                                <option>Singapore Citizen</option>
+                                                <option>Permanent Resident</option>
+                                                <option>Foreigner</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column">
-                                <div class="field">
-                                    <label class="label">Child's Gender</label>
-                                    <div class="control">
-                                        <label class="radio">
-                                            <input type="radio" name="child_gender" value="Male"> Male
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="child_gender" value="Female"> Female
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <div class="field">
-                                    <label class="label">Child's Nationality</label>
-                                    <div class="select">
-                                        <select name="child_nationality">
-                                            <option>Singapore Citizen</option>
-                                            <option>Permanent Resident</option>
-                                            <option>Foreigner</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="field">
-                            <label class="label">Child's Birth Cert / FIN / Student Pass</label>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="" name="child_identify_no" minlength="8">
+                            <div class="field">
+                                <label class="label">Child's Birth Cert / FIN / Student Pass</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="" name="child_identify_no" minlength="8">
+                                </div>
                             </div>
                         </div>
+                        
 
                         <div class="field">
                             <label class="label">Preferred Start Date</label>
@@ -538,7 +542,7 @@
                         </div>
 
                         <div class="field">
-                            <label class="label">Notes</label>
+                            <label class="label">Notes (Optional)</label>
                             <div class="control">
                                 <textarea class="textarea" placeholder="Your notes here" name="notes"></textarea>
                             </div>
@@ -797,6 +801,15 @@
             
             var maxDate = year + '-' + month + '-' + day;
             $("input[name='start_date']").attr('min', maxDate);
+
+            $("#child-status").on('change', function() {
+                if( this.value == 'born' ){
+                    $(".child-optional-group").css('display', 'block');
+                }
+                else{
+                    $(".child-optional-group").css('display', 'none');
+                }
+            });
 
             $("#form-mfs").validate({
               // messages: {
