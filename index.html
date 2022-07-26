@@ -82,7 +82,7 @@
                                             <option selected disabled>Choose salutation</option>
                                             <option>Mr</option>
                                             <option>Ms</option>
-                                            <option>Madm</option>
+                                            <option>Mdm</option>
                                             <option>Mrs</option>
                                             <option>Dr</option>
                                         </select>
@@ -207,7 +207,7 @@
                             </div>
                         </div>
 
-                        <div class="field">
+                        <div id="child-delivery-date-group" class="field" style="display:none;">
                             <label class="label">Expected delivery date</label>
                             <div class="control">
                                 <input class="input" type="date" placeholder="" name="expected_delivery_date">
@@ -330,7 +330,7 @@
                         <div class="field">
                             <label class="label">Preferred Centre (up to 3 - ranked in order)</label>
                             <div class="select select-multiple">
-                                <select multiple class="select-centre" name="preferred_centre" style="width:300px;" required>
+                                <select multiple class="select-centre" name="preferred_centre[]" style="width:300px;" required>
                                     <option value="ALC">Blk 491 Admiralty Link</option>
                                     <option value="AV2">Blk 302B Anchorvale Link</option>
                                     <option value="AV3">Blk 314A Anchorvale Link</option>
@@ -491,9 +491,9 @@
                                     <option>4001 to 4500</option>
                                     <option>4501 to 7500</option>
                                     <option>7501 to 10000</option>
-                                    <option>10000 to 12500</option>
+                                    <option>10001 to 12500</option>
                                     <option>12501 to 15000</option>
-                                    <option>15000 & above</option>
+                                    <option>15001 & above</option>
                                 </select>
                             </div>
                         </div>
@@ -528,20 +528,22 @@
                             </div>
                         </div>
 
-                        <div class="columns">
-                            <div class="column">
-                                <div class="field">
-                                    <label class="label">Centre of Visit</label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="" name="centre_visit">
+                        <div class="visit-optional-group" style="display:none;">
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Centre of Visit</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="" name="centre_visit">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="column">
-                                <div class="field">
-                                    <label class="label">Date of Centre Visit</label>
-                                    <div class="control">
-                                        <input class="input" type="date" placeholder="" name="centre_visit_date">
+                                <div class="column">
+                                    <div class="field">
+                                        <label class="label">Date of Centre Visit</label>
+                                        <div class="control">
+                                            <input class="input" type="date" placeholder="" name="centre_visit_date">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -827,10 +829,21 @@
 
             $("#child-status").on('change', function() {
                 if( this.value == 'born' ){
+                    $("#child-delivery-date-group").css('display', 'none');
                     $(".child-optional-group").css('display', 'block');
                 }
                 else{
+                    $("#child-delivery-date-group").css('display', 'block');
                     $(".child-optional-group").css('display', 'none');
+                }
+            });
+
+            $("input[name='centre_visit_option']").on('change', function() {
+                if( this.value == 'yes' ){
+                    $(".visit-optional-group").css('display', 'block');
+                }
+                else{
+                    $(".visit-optional-group").css('display', 'none');
                 }
             });
 
